@@ -8,11 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class AddBookController implements Initializable {
     Database database;
 
     @FXML
@@ -27,6 +29,8 @@ public class Controller implements Initializable {
     private Button buttonSave;
     @FXML
     private Button buttonCancel;
+    @FXML
+    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,7 +43,8 @@ public class Controller implements Initializable {
             addBook();
         }
         if (event.getSource() == buttonCancel) {
-            Platform.exit();
+            Stage stage = (Stage) rootPane.getScene().getWindow();
+            stage.close();
         }
     }
 
