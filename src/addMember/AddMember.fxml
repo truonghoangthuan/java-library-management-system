@@ -10,26 +10,26 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addBook.AddBookController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="addMember.AddMemberController">
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="textFiledbookID" promptText="ID">
+            <TextField fx:id="textFieldID" promptText="ID">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="textFieldbookTitle" layoutX="10.0" layoutY="10.0" promptText="Title">
+            <TextField fx:id="textFieldName" layoutX="10.0" layoutY="10.0" promptText="Name">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="textFieldbookAuthor" layoutX="10.0" layoutY="35.0" promptText="Author">
+            <TextField fx:id="textFieldPhone" layoutX="10.0" layoutY="35.0" promptText="Phone">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="textFieldbookPublisher" layoutX="10.0" layoutY="60.0" promptText="Publisher">
+            <TextField fx:id="textFieldEmail" layoutX="10.0" layoutY="60.0" promptText="Email">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>

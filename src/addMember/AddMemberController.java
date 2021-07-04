@@ -1,7 +1,6 @@
-package addBook;
+package addMember;
 
 import database.Database;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,52 +13,51 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddBookController implements Initializable {
+public class AddMemberController implements Initializable {
     Database database;
 
     @FXML
-    private TextField textFiledbookID;
+    private AnchorPane rootPane;
     @FXML
-    private TextField textFieldbookTitle;
+    private TextField textFieldID;
     @FXML
-    private TextField textFieldbookAuthor;
+    private TextField textFieldName;
     @FXML
-    private TextField textFieldbookPublisher;
+    private TextField textFieldPhone;
+    @FXML
+    private TextField textFieldEmail;
     @FXML
     private Button buttonSave;
     @FXML
     private Button buttonCancel;
-    @FXML
-    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         database = new Database();
     }
 
-    @FXML
     public void buttonHandler(ActionEvent event) {
         if (event.getSource() == buttonSave) {
-            addBook();
-        } else if (event.getSource() == buttonCancel) {
+            addMember();
+        } else if (event.getSource() == buttonCancel){
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.close();
         }
     }
 
-    private void addBook() {
-        if (textFiledbookID.getText().isEmpty() || textFieldbookTitle.getText().isEmpty() || textFieldbookAuthor.getText().isEmpty() || textFieldbookPublisher.getText().isEmpty()) {
+    private void addMember() {
+        if (textFieldID.getText().isEmpty() || textFieldName.getText().isEmpty() || textFieldEmail.getText().isEmpty() || textFieldPhone.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Please enter in all fields");
             alert.showAndWait();
             return;
         } else {
-            String query = "INSERT INTO books VALUES ("
-                    + textFiledbookID.getText() + ",'"
-                    + textFieldbookTitle.getText() + "','"
-                    + textFieldbookAuthor.getText() + "','"
-                    + textFieldbookPublisher.getText() + "')";
+            String query = "INSERT INTO members VALUES ("
+                    + textFieldID.getText() + ",'"
+                    + textFieldName.getText() + "','"
+                    + textFieldPhone.getText() + "','"
+                    + textFieldEmail.getText() + "')";
             database.executeQuery(query);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
