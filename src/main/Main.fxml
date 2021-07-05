@@ -181,7 +181,7 @@
                                     </VBox>
                                     <HBox alignment="CENTER" prefHeight="99.0" prefWidth="501.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Issue">
+                                          <Button mnemonicParsing="false" onAction="#loadIssueFunc" prefHeight="35.0" prefWidth="120.0" text="Issue">
                                              <graphic>
                                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
