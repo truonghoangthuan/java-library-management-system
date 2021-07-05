@@ -33,7 +33,7 @@ public class AddMemberController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        database = new Database();
+        database = Database.getDatabase();
     }
 
     public void buttonHandler(ActionEvent event) {

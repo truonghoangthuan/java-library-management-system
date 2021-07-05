@@ -6,8 +6,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
-    public Database() {
+    private static Database database=null;
 
+    private Database() {
+        getConnection();
+    }
+
+    public static Database getDatabase() {
+        if (database == null) {
+            database = new Database();
+        }
+        return database;
     }
 
     // Connect to the database.

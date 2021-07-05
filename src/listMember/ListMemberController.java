@@ -42,7 +42,7 @@ public class ListMemberController implements Initializable {
     }
 
     private void loadData() {
-        database = new Database();
+        database = Database.getDatabase();
         Connection connection = database.getConnection();
         String query = "SELECT * FROM members";
         ResultSet resultSet;
