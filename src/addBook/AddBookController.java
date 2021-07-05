@@ -1,7 +1,6 @@
 package addBook;
 
 import database.Database;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,13 +17,13 @@ public class AddBookController implements Initializable {
     Database database;
 
     @FXML
-    private TextField textFiledbookID;
+    private TextField textFiledBookID;
     @FXML
-    private TextField textFieldbookTitle;
+    private TextField textFieldBookTitle;
     @FXML
-    private TextField textFieldbookAuthor;
+    private TextField textFieldBookAuthor;
     @FXML
-    private TextField textFieldbookPublisher;
+    private TextField textFieldBookPublisher;
     @FXML
     private Button buttonSave;
     @FXML
@@ -48,7 +47,7 @@ public class AddBookController implements Initializable {
     }
 
     private void addBook() {
-        if (textFiledbookID.getText().isEmpty() || textFieldbookTitle.getText().isEmpty() || textFieldbookAuthor.getText().isEmpty() || textFieldbookPublisher.getText().isEmpty()) {
+        if (textFiledBookID.getText().isEmpty() || textFieldBookTitle.getText().isEmpty() || textFieldBookAuthor.getText().isEmpty() || textFieldBookPublisher.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Please enter in all fields");
@@ -56,10 +55,11 @@ public class AddBookController implements Initializable {
             return;
         } else {
             String query = "INSERT INTO books VALUES ("
-                    + textFiledbookID.getText() + ",'"
-                    + textFieldbookTitle.getText() + "','"
-                    + textFieldbookAuthor.getText() + "','"
-                    + textFieldbookPublisher.getText() + "')";
+                    + textFiledBookID.getText() + ",'"
+                    + textFieldBookTitle.getText() + "','"
+                    + textFieldBookAuthor.getText() + "','"
+                    + textFieldBookPublisher.getText() + "',"
+                    + true + ")";
             database.executeQuery(query);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

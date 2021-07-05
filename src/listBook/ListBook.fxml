@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listBook.ListBookController">
    <children>
       <TableView fx:id="tableBook" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="colTitle" prefWidth="162.0" text="Title" />
-            <TableColumn fx:id="colAuthor" minWidth="0.0" prefWidth="169.0" text="Author" />
-            <TableColumn fx:id="colPublisher" minWidth="0.0" prefWidth="193.0" text="Publisher" />
+          <TableColumn fx:id="colID" prefWidth="33.0" text="ID" />
+          <TableColumn fx:id="colTitle" prefWidth="180.0" text="Title" />
+            <TableColumn fx:id="colAuthor" minWidth="0.0" prefWidth="168.0" text="Author" />
+            <TableColumn fx:id="colPublisher" minWidth="0.0" prefWidth="151.0" text="Publisher" />
+            <TableColumn fx:id="colStatus" minWidth="0.0" prefWidth="67.0" text="Status" />
         </columns>
       </TableView>
    </children>

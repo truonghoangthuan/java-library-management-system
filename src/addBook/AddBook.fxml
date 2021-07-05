@@ -14,22 +14,22 @@
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="textFiledbookID" promptText="ID">
+            <TextField fx:id="textFiledBookID" promptText="ID">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="textFieldbookTitle" layoutX="10.0" layoutY="10.0" promptText="Title">
+            <TextField fx:id="textFieldBookTitle" layoutX="10.0" layoutY="10.0" promptText="Title">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="textFieldbookAuthor" layoutX="10.0" layoutY="35.0" promptText="Author">
+            <TextField fx:id="textFieldBookAuthor" layoutX="10.0" layoutY="35.0" promptText="Author">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="textFieldbookPublisher" layoutX="10.0" layoutY="60.0" promptText="Publisher">
+            <TextField fx:id="textFieldBookPublisher" layoutX="10.0" layoutY="60.0" promptText="Publisher">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>

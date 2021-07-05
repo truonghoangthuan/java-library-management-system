@@ -1,5 +1,6 @@
 package listBook;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Book {
@@ -7,12 +8,16 @@ public class Book {
     private SimpleStringProperty title;
     private SimpleStringProperty author;
     private SimpleStringProperty publisher;
+    private SimpleStringProperty status;
 
-    public Book(String id, String title, String author, String publisher) {
+
+
+    public Book(String id, String title, String author, String publisher, String status) {
         this.id = new SimpleStringProperty(id);
         this.title = new SimpleStringProperty(title);
         this.author = new SimpleStringProperty(author);
         this.publisher = new SimpleStringProperty(publisher);
+        this.status = new SimpleStringProperty(status);
     }
 
     public String getId() {
@@ -29,5 +34,9 @@ public class Book {
 
     public String getPublisher() {
         return publisher.get();
+    }
+
+    public String getStatus() {
+        return status.get();
     }
 }

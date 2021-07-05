@@ -34,6 +34,8 @@ public class ListBookController implements Initializable {
     private TableColumn<Book, String> colAuthor;
     @FXML
     private TableColumn<Book, String> colPublisher;
+    @FXML
+    private TableColumn<Book, String> colStatus;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,8 +58,9 @@ public class ListBookController implements Initializable {
                 String title = resultSet.getString("bookTitle");
                 String author = resultSet.getString("bookAuthor");
                 String publisher = resultSet.getString("bookPublisher");
+                String status = String.valueOf(resultSet.getBoolean("bookStatus"));
 
-                booksList.add(new Book(id, title, author, publisher));
+                booksList.add(new Book(id, title, author, publisher, status));
             }
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
@@ -72,5 +75,6 @@ public class ListBookController implements Initializable {
         colTitle.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         colAuthor.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
         colPublisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<Book, String>("status"));
     }
 }
