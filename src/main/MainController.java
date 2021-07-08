@@ -246,4 +246,30 @@ public class MainController implements Initializable {
             alert1.showAndWait();
         }
     }
+
+    @FXML
+    public void loadRenewBook(ActionEvent event) {
+        if (!isReadyForSubmission) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please select a book to submit");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Are you sure to renew this book!");
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == ButtonType.OK) {
+            String bookID = textFieldIssueBookID.getText();
+            String query = "UPDATE issues SET issueTime = CURRENT_TIMESTAMP, renew_count = renew_count + 1 WHERE bookID = " + bookID;
+            database.executeQuery(query);
+
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+            alert1.setTitle("Success");
+            alert1.setHeaderText("Book has been renewed");
+            alert1.showAndWait();
+        }
+    }
 }

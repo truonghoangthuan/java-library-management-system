@@ -218,7 +218,7 @@
                                  <bottom>
                                     <HBox alignment="CENTER" prefHeight="60.0" prefWidth="460.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Renew">
+                                          <Button mnemonicParsing="false" onAction="#loadRenewBook" prefHeight="35.0" prefWidth="120.0" text="Renew">
                                              <HBox.margin>
                                                 <Insets right="10.0" />
                                              </HBox.margin>
