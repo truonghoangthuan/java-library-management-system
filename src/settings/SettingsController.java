@@ -31,10 +31,19 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        initDefaultValue();
     }
 
-    public void buttonHandler(ActionEvent event) {
+    private void initDefaultValue() {
+        Preferences preferences = Preferences.getPreferences();
+        textFieldDaysWithoutFine.setText(String.valueOf(preferences.getNumberOfDaysWithoutFine()));
+        textFieldFinePerDay.setText(String.valueOf(preferences.getFinePerDay()));
+        textFieldUsername.setText(preferences.getUsername());
+        passwordField.setText(preferences.getPassword());
+    }
+
+    @FXML
+    private void buttonHandler(ActionEvent event) {
         if (event.getSource() == buttonSave) {
 
         }
