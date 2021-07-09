@@ -45,7 +45,14 @@ public class SettingsController implements Initializable {
     @FXML
     private void buttonHandler(ActionEvent event) {
         if (event.getSource() == buttonSave) {
+            Preferences preferences = Preferences.getPreferences();
 
+            preferences.setNumberOfDaysWithoutFine(Integer.parseInt(textFieldDaysWithoutFine.getText()));
+            preferences.setFinePerDay(Float.parseFloat(textFieldFinePerDay.getText()));
+            preferences.setUsername(textFieldUsername.getText());
+            preferences.setPassword(passwordField.getText());
+
+            Preferences.writePrferencesToFile(preferences);
         }
         if (event.getSource() == buttonCancel) {
             Stage stage = (Stage) rootPane.getScene().getWindow();

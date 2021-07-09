@@ -1,5 +1,6 @@
 package settings;
 
+import alert.AlertMaker;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -81,5 +82,25 @@ public class Preferences {
             e.printStackTrace();
         }
         return preferences;
+    }
+
+    public static void writePrferencesToFile(Preferences preference) {
+        Writer writer = null;
+        try {
+            Gson gson = new Gson();
+            writer = new FileWriter(CONFIG_FILE);
+            gson.toJson(preference, writer);
+
+            AlertMaker.showSimpleAlert("Success", "Setting updated");
+        } catch (IOException ex) {
+            Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
+            AlertMaker.showErrorMessage("Failed", "Can not save configuration file");
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Preferences.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

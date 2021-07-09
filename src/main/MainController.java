@@ -65,6 +65,11 @@ public class MainController implements Initializable {
         loadWindow("../listBook/ListBook.fxml", "Book list");
     }
 
+    @FXML
+    public void loadSettings(ActionEvent event) {
+        loadWindow("../settings/Settings.fxml", "Settings");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         database = Database.getDatabase();

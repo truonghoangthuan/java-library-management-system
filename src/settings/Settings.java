@@ -15,8 +15,6 @@ public class Settings extends Application {
         primaryStage.setTitle("Settings");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-        Preferences.initConfig();
     }
 
     public static void main(String[] args) {

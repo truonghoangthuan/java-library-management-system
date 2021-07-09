@@ -1,1 +1,1 @@
-{"numberOfDaysWithoutFine":14,"finePerDay":2.0,"username":"admin","password":"admin"}
+{"numberOfDaysWithoutFine":14,"finePerDay":1.0,"username":"admin","password":"admin"}
