@@ -2,6 +2,7 @@ package settings;
 
 import alert.AlertMaker;
 import com.google.gson.Gson;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -19,7 +20,7 @@ public class Preferences {
         numberOfDaysWithoutFine = 14;
         finePerDay = 2;
         username = "admin";
-        password = "admin";
+        setPassword("admin");
     }
 
     public void setNumberOfDaysWithoutFine(int numberOfDaysWithoutFine) {
@@ -35,7 +36,7 @@ public class Preferences {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = DigestUtils.sha1Hex(password);
     }
 
     public int getNumberOfDaysWithoutFine() {

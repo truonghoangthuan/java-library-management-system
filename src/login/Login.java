@@ -1,4 +1,4 @@
-package main;
+package login;
 
 import database.Database;
 import javafx.application.Application;
@@ -7,10 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Login extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

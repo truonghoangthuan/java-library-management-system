@@ -23,11 +23,10 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://F:/mysql-connector-java-8.0.24.jar!/" />
+          <root url="jar://F:/java-libraries/mysql-connector-java-8.0.24.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -36,7 +35,17 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://F:/gson-2.8.2.jar!/" />
+          <root url="jar://F:/java-libraries/gson-2.8.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://F:/java-libraries/commons-codec-1.15.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
