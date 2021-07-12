@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -21,6 +22,9 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     Database database;
+
+    @FXML
+    private StackPane rootPane;
 
     @FXML
     private Text bookTitle;
@@ -46,35 +50,22 @@ public class MainController implements Initializable {
     Boolean isReadyForSubmission = false;
 
     @FXML
-    public void loadAddMember(ActionEvent event) {
-        loadWindow("../addMember/AddMember.fxml", "Add member");
-    }
-
+    private MenuItem menuItemClose;
     @FXML
-    public void loadViewMembers(ActionEvent event) {
-        loadWindow("../listMember/ListMember.fxml", "Member list");
-    }
-
+    private MenuItem menuItemAddBook;
     @FXML
-    public void loadAddBook(ActionEvent event) {
-        loadWindow("../addBook/AddBook.fxml", "Add book");
-    }
-
+    private MenuItem menuItemAddMember;
     @FXML
-    public void loadViewBooks(ActionEvent event) {
-        loadWindow("../listBook/ListBook.fxml", "Book list");
-    }
-
+    private MenuItem menuItemViewBooks;
     @FXML
-    public void loadSettings(ActionEvent event) {
-        loadWindow("../settings/Settings.fxml", "Settings");
-    }
+    private MenuItem menuItemViewMembers;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         database = Database.getDatabase();
     }
 
+    //    Method to load new window with 2 parameters: location of the fxml file and the title for window
     void loadWindow(String location, String title) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(location));
@@ -87,6 +78,47 @@ public class MainController implements Initializable {
         }
     }
 
+    //    Method to handle menu item functions
+    @FXML
+    public void menuBarHandler(ActionEvent event) {
+        if (event.getSource() == menuItemClose)
+            ((Stage)rootPane.getScene().getWindow()).close();
+        else if (event.getSource() == menuItemAddBook)
+            loadAddBook();
+        else if (event.getSource() == menuItemAddMember)
+            loadAddMember();
+        else if (event.getSource() == menuItemViewBooks)
+            loadViewBooks();
+        else if (event.getSource() == menuItemViewMembers)
+            loadViewMembers();
+    }
+
+    @FXML
+    public void loadAddMember() {
+        loadWindow("../addMember/AddMember.fxml", "Add member");
+    }
+
+    @FXML
+    public void loadViewMembers() {
+        loadWindow("../listMember/ListMember.fxml", "Member list");
+    }
+
+    @FXML
+    public void loadAddBook() {
+        loadWindow("../addBook/AddBook.fxml", "Add book");
+    }
+
+    @FXML
+    public void loadViewBooks() {
+        loadWindow("../listBook/ListBook.fxml", "Book list");
+    }
+
+    @FXML
+    public void loadSettings() {
+        loadWindow("../settings/Settings.fxml", "Settings");
+    }
+
+    //    Function to handle input data of book information text field
     @FXML
     public void loadBookInfor() {
         String id = textFieldBookInfor.getText();
@@ -121,6 +153,7 @@ public class MainController implements Initializable {
         }
     }
 
+    //    Method to handle input data of member information text field
     @FXML
     public void loadMemberInfor() {
         String id = textFieldMemberInfor.getText();
@@ -151,8 +184,9 @@ public class MainController implements Initializable {
         }
     }
 
+    //    Method to handle Issue button
     @FXML
-    public void loadIssueFunc(ActionEvent event) {
+    public void loadIssueFunc() {
         String bookId = textFieldBookInfor.getText();
         String memberID = textFieldMemberInfor.getText();
 
@@ -177,8 +211,9 @@ public class MainController implements Initializable {
         }
     }
 
+    //    Method to handle input book information of the text field on submission tab
     @FXML
-    public void loadIssueBook(ActionEvent event) {
+    public void loadIssueBook() {
         ObservableList<String> issueData = FXCollections.observableArrayList();
         isReadyForSubmission = false;
 
@@ -224,8 +259,9 @@ public class MainController implements Initializable {
         issueList.getItems().setAll(issueData);
     }
 
+    //    Method to handle submission button
     @FXML
-    public void loadSubmissionBook(ActionEvent event) {
+    public void loadSubmissionBook() {
         if (!isReadyForSubmission) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
@@ -239,7 +275,7 @@ public class MainController implements Initializable {
         alert.setHeaderText("Are you sure to submit this book!");
         Optional<ButtonType> option = alert.showAndWait();
         if (option.get() == ButtonType.OK) {
-        String bookID = textFieldIssueBookID.getText();
+            String bookID = textFieldIssueBookID.getText();
             String query = "DELETE FROM issues WHERE bookID = " + bookID;
             database.executeQuery(query);
             String query1 = "UPDATE books SET bookStatus = TRUE WHERE bookID = " + bookID;
@@ -252,8 +288,9 @@ public class MainController implements Initializable {
         }
     }
 
+    //    Method to handle renew button
     @FXML
-    public void loadRenewBook(ActionEvent event) {
+    public void loadRenewBook() {
         if (!isReadyForSubmission) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
