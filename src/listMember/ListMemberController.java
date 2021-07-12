@@ -60,7 +60,6 @@ public class ListMemberController implements Initializable {
                 booksList.add(new Member(id, title, author, publisher));
             }
         } catch (SQLException throwables) {
-//            throwables.printStackTrace();
             System.out.println(throwables.getMessage());
         }
 

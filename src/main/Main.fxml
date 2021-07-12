@@ -30,6 +30,7 @@
                     <items>
                       <MenuItem fx:id="menuItemViewBooks" mnemonicParsing="false" onAction="#menuBarHandler" text="View book list" />
                         <MenuItem fx:id="menuItemViewMembers" mnemonicParsing="false" onAction="#menuBarHandler" text="View member list" />
+                        <MenuItem fx:id="menuItemFullscreen" mnemonicParsing="false" onAction="#menuBarHandler" text="Fullscreen" />
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Help">

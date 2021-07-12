@@ -1,12 +1,13 @@
 package listBook;
 
+import alert.AlertMaker;
 import database.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
@@ -15,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ListBookController implements Initializable {
@@ -24,6 +26,7 @@ public class ListBookController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
+
     @FXML
     private TableView<Book> tableBook;
     @FXML
@@ -36,6 +39,9 @@ public class ListBookController implements Initializable {
     private TableColumn<Book, String> colPublisher;
     @FXML
     private TableColumn<Book, String> colStatus;
+
+    @FXML
+    private MenuItem contextMenuDelete;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -63,11 +69,10 @@ public class ListBookController implements Initializable {
                 booksList.add(new Book(id, title, author, publisher, status));
             }
         } catch (SQLException throwables) {
-//            throwables.printStackTrace();
             System.out.println(throwables.getMessage());
         }
 
-        tableBook.getItems().setAll(booksList);
+        tableBook.setItems(booksList);
     }
 
     private void initCol() {
@@ -76,5 +81,25 @@ public class ListBookController implements Initializable {
         colAuthor.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
         colPublisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
         colStatus.setCellValueFactory(new PropertyValueFactory<Book, String>("status"));
+    }
+
+    //    Method to handle context menu function
+    @FXML
+    private void contextMenuHandler(ActionEvent event) {
+        if (event.getSource() == contextMenuDelete) {
+            Book selectedBook = tableBook.getSelectionModel().getSelectedItem();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm");
+            alert.setHeaderText("Are you sure want to delete " + selectedBook.getTitle() + "?");
+
+            Optional<ButtonType> option = alert.showAndWait();
+            if (option.get() == ButtonType.OK) {
+                String query = "DELETE FROM books WHERE bookID = " + selectedBook.getId();
+                database.executeQuery(query);
+                AlertMaker.showSimpleAlert("Success", "Book deleted");
+                booksList.remove(selectedBook);
+            }
+        }
     }
 }

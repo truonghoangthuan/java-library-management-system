@@ -16,6 +16,13 @@
             <TableColumn fx:id="colPublisher" minWidth="0.0" prefWidth="151.0" text="Publisher" />
             <TableColumn fx:id="colStatus" minWidth="0.0" prefWidth="67.0" text="Status" />
         </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="contextMenuDelete" mnemonicParsing="false" onAction="#contextMenuHandler" text="Delete" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
    </children>
 </AnchorPane>

@@ -59,6 +59,8 @@ public class MainController implements Initializable {
     private MenuItem menuItemViewBooks;
     @FXML
     private MenuItem menuItemViewMembers;
+    @FXML
+    private MenuItem menuItemFullscreen;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,6 +93,10 @@ public class MainController implements Initializable {
             loadViewBooks();
         else if (event.getSource() == menuItemViewMembers)
             loadViewMembers();
+        else if (event.getSource() == menuItemFullscreen) {
+            Stage stage = (Stage) rootPane.getScene().getWindow();
+            stage.setFullScreen(!stage.isFullScreen());
+        }
     }
 
     @FXML
