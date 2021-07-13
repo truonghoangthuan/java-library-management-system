@@ -1,5 +1,6 @@
 package addBook;
 
+import alert.AlertMaker;
 import database.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import listBook.Book;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +32,8 @@ public class AddBookController implements Initializable {
     private Button buttonCancel;
     @FXML
     private AnchorPane rootPane;
+
+    private Boolean isEditable = Boolean.FALSE;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,6 +57,8 @@ public class AddBookController implements Initializable {
             alert.setHeaderText("Please enter in all fields");
             alert.showAndWait();
             return;
+        } else if (isEditable) {
+            editBookHandler();
         } else {
             String query = "INSERT INTO books VALUES ("
                     + textFiledBookID.getText() + ",'"
@@ -67,5 +73,28 @@ public class AddBookController implements Initializable {
             alert.setHeaderText("Book added successfully");
             alert.showAndWait();
         }
+    }
+
+    //    Method to render selected book data to the edit form
+    public void inflateUI(Book book) {
+        isEditable = Boolean.TRUE;
+
+        textFiledBookID.setText(book.getId());
+        textFieldBookTitle.setText(book.getTitle());
+        textFieldBookAuthor.setText(book.getAuthor());
+        textFieldBookPublisher.setText(book.getPublisher());
+
+        textFiledBookID.setEditable(false);
+    }
+
+    private void editBookHandler() {
+        String query = "UPDATE books SET "
+                + "bookTitle = " + "'" + textFieldBookTitle.getText() + "', "
+                + "bookAuthor = " + "'" + textFieldBookAuthor.getText() + "', "
+                + "bookPublisher = " + "'" + textFieldBookPublisher.getText() + "' "
+                + "WHERE bookID = " + textFiledBookID.getText();
+        System.out.println(query);
+        database.executeQuery(query);
+        AlertMaker.showSimpleAlert("Success", "Book edited");
     }
 }

@@ -1,5 +1,11 @@
 package listBook;
 
+import addBook.AddBookController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import alert.AlertMaker;
 import database.Database;
 import javafx.collections.FXCollections;
@@ -9,8 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,9 +29,6 @@ public class ListBookController implements Initializable {
     Database database;
 
     ObservableList<Book> booksList = FXCollections.observableArrayList();
-
-    @FXML
-    private AnchorPane rootPane;
 
     @FXML
     private TableView<Book> tableBook;
@@ -41,7 +44,9 @@ public class ListBookController implements Initializable {
     private TableColumn<Book, String> colStatus;
 
     @FXML
-    private MenuItem contextMenuDelete;
+    private MenuItem menuItemDelete;
+    @FXML
+    private MenuItem menuItemEdit;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,22 +88,57 @@ public class ListBookController implements Initializable {
         colStatus.setCellValueFactory(new PropertyValueFactory<Book, String>("status"));
     }
 
-    //    Method to handle context menu function
+    //    Method to check is the booked issued or not.
+    private boolean isBookIssued(String bookID) {
+        String query = "SELECT COUNT(*) FROM issues WHERE bookID = " + bookID;
+        Connection connection = database.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return (count > 0);
+            }
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+        }
+        return false;
+    }
+
+    //    Method to handle context menu function.
     @FXML
     private void contextMenuHandler(ActionEvent event) {
-        if (event.getSource() == contextMenuDelete) {
-            Book selectedBook = tableBook.getSelectionModel().getSelectedItem();
+        Book selectedBook = tableBook.getSelectionModel().getSelectedItem();
+        if (event.getSource() == menuItemDelete) {
+            if (!isBookIssued(selectedBook.getId())) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm");
+                alert.setHeaderText("Are you sure want to delete " + selectedBook.getTitle() + "?");
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm");
-            alert.setHeaderText("Are you sure want to delete " + selectedBook.getTitle() + "?");
+                Optional<ButtonType> option = alert.showAndWait();
+                if (option.get() == ButtonType.OK) {
+                    String query = "DELETE FROM books WHERE bookID = " + selectedBook.getId();
+                    database.executeQuery(query);
+                    AlertMaker.showSimpleAlert("Success", "Book deleted");
+                    booksList.remove(selectedBook);
+                }
+            } else {
+                AlertMaker.showErrorMessage("Error", selectedBook.getTitle() + " is already issued!");
+            }
+        } else if (event.getSource() == menuItemEdit) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../addBook/addBook.fxml"));
+                Parent parent = fxmlLoader.load();
 
-            Optional<ButtonType> option = alert.showAndWait();
-            if (option.get() == ButtonType.OK) {
-                String query = "DELETE FROM books WHERE bookID = " + selectedBook.getId();
-                database.executeQuery(query);
-                AlertMaker.showSimpleAlert("Success", "Book deleted");
-                booksList.remove(selectedBook);
+                AddBookController controller = fxmlLoader.getController();
+                controller.inflateUI(selectedBook);
+
+                Stage stage = new Stage(StageStyle.DECORATED);
+                stage.setTitle("Edit book");
+                stage.setScene(new Scene(parent));
+                stage.show();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
