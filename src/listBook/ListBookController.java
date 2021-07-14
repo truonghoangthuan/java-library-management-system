@@ -47,6 +47,8 @@ public class ListBookController implements Initializable {
     private MenuItem menuItemDelete;
     @FXML
     private MenuItem menuItemEdit;
+    @FXML
+    private MenuItem menuItemRefresh;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,7 +56,10 @@ public class ListBookController implements Initializable {
         loadData();
     }
 
+    //    Method to get book data from database
     private void loadData() {
+        booksList.clear();
+
         database = Database.getDatabase();
         Connection connection = database.getConnection();
         String query = "SELECT * FROM books";
@@ -80,6 +85,7 @@ public class ListBookController implements Initializable {
         tableBook.setItems(booksList);
     }
 
+    //    Method to render data to table view.
     private void initCol() {
         colID.setCellValueFactory(new PropertyValueFactory<Book, Integer>("id"));
         colTitle.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
@@ -140,6 +146,8 @@ public class ListBookController implements Initializable {
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        } else if (event.getSource() == menuItemRefresh) {
+            loadData();
         }
     }
 }

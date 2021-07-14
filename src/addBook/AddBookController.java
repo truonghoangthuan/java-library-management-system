@@ -50,6 +50,7 @@ public class AddBookController implements Initializable {
         }
     }
 
+    //    Method to execute query add book to database.
     private void addBook() {
         if (textFiledBookID.getText().isEmpty() || textFieldBookTitle.getText().isEmpty() || textFieldBookAuthor.getText().isEmpty() || textFieldBookPublisher.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -75,7 +76,7 @@ public class AddBookController implements Initializable {
         }
     }
 
-    //    Method to render selected book data to the edit form
+    //    Method to render selected book data to the edit form.
     public void inflateUI(Book book) {
         isEditable = Boolean.TRUE;
 
@@ -87,13 +88,13 @@ public class AddBookController implements Initializable {
         textFiledBookID.setEditable(false);
     }
 
+    //    Method to execute edit book function.
     private void editBookHandler() {
         String query = "UPDATE books SET "
                 + "bookTitle = " + "'" + textFieldBookTitle.getText() + "', "
                 + "bookAuthor = " + "'" + textFieldBookAuthor.getText() + "', "
                 + "bookPublisher = " + "'" + textFieldBookPublisher.getText() + "' "
                 + "WHERE bookID = " + textFiledBookID.getText();
-        System.out.println(query);
         database.executeQuery(query);
         AlertMaker.showSimpleAlert("Success", "Book edited");
     }

@@ -19,6 +19,7 @@
          <contextMenu>
             <ContextMenu>
               <items>
+                  <MenuItem fx:id="menuItemRefresh" mnemonicParsing="false" onAction="#contextMenuHandler" text="Refresh" />
                 <MenuItem fx:id="menuItemDelete" mnemonicParsing="false" onAction="#contextMenuHandler" text="Delete" />
                   <MenuItem fx:id="menuItemEdit" mnemonicParsing="false" onAction="#contextMenuHandler" text="Edit" />
               </items>
